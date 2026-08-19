@@ -4,10 +4,8 @@ An adaptive, conversation-first language learning application designed to help l
 
 Instead of focusing heavily on traditional grammar lessons, the application teaches language through realistic conversations and progressively introduces more natural and advanced ways of expressing ideas.
 
-Current Goal
-
+**Current Goal**
 Build an initial English-learning prototype focused on everyday communication, with:
-
 Real-life conversation scenarios
 Personalized feedback
 AI-assisted conversation
