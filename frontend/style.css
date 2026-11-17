@@ -64,9 +64,10 @@
   }
 
   .app{
-    max-width: 720px;
+    width: 100%;
     margin: 0 auto;
-    padding: 28px 20px 60px;
+    /* Full-bleed: side padding scales with the viewport instead of a fixed column. */
+    padding: 32px clamp(20px, 4vw, 64px) 72px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -84,27 +85,27 @@
     align-items:baseline;
     gap:10px;
   }
-  .brand .te{ font-size: 1.4rem; color: var(--mustard); }
-  .brand .en{ font-size: 0.85rem; color: var(--on-indigo-dim); letter-spacing: 0.08em; text-transform: uppercase; }
+  .brand .te{ font-size: clamp(1.4rem, 2.2vw, 2.1rem); color: var(--mustard); }
+  .brand .en{ font-size: clamp(0.85rem, 1vw, 1.05rem); color: var(--on-indigo-dim); letter-spacing: 0.08em; text-transform: uppercase; }
 
   main{ flex: 1; display:flex; flex-direction:column; }
 
   .screen{ display:none; animation: rise 0.35s ease; }
-  .screen.active{ display:flex; flex-direction:column; gap: 22px; }
+  .screen.active{ display:flex; flex-direction:column; gap: clamp(22px, 2.4vw, 36px); }
   @keyframes rise{ from{ opacity:0; transform: translateY(8px);} to{opacity:1; transform:none;} }
 
   /* ---------------- MAIN / LANGUAGE SETUP ---------------- */
   .lang-row{
     display:grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: clamp(14px, 2vw, 30px);
     margin-top: 6px;
   }
   .lang-card{
     background: var(--ivory);
     color: var(--ink);
     border-radius: var(--radius);
-    padding: 18px 16px;
+    padding: clamp(18px, 2.1vw, 30px) clamp(16px, 1.9vw, 28px);
     border: 2px solid transparent;
     box-shadow: var(--shadow);
     cursor: pointer;
@@ -115,7 +116,7 @@
   }
   .lang-card:focus-within{ border-color: var(--mustard); }
   .lang-card .from{
-    font-size: 0.78rem;
+    font-size: clamp(0.78rem, 0.95vw, 0.95rem);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--ink-soft);
@@ -130,7 +131,7 @@
     border-radius: 0;
     padding: 2px 22px 6px 0;
     font-family: 'Fraunces', 'Noto Sans Telugu', serif;
-    font-size: 1.1rem;
+    font-size: clamp(1.1rem, 1.7vw, 1.6rem);
     color: var(--ink);
     cursor: pointer;
     outline: none;
@@ -144,7 +145,7 @@
 
   .lang-warning{
     margin: 12px 2px 0;
-    font-size: 0.82rem;
+    font-size: clamp(0.82rem, 1vw, 1rem);
     color: var(--mustard);
     display:none;
   }
@@ -156,23 +157,23 @@
   }
   .hero .kicker{
     color: var(--mustard);
-    font-size: 0.8rem;
+    font-size: clamp(0.8rem, 1.05vw, 1.05rem);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin-bottom: 10px;
   }
   .hero h1{
-    font-size: clamp(2rem, 7vw, 2.7rem);
+    font-size: clamp(2.2rem, 5.6vw, 5rem);
     color: var(--on-indigo);
     line-height: 1.08;
   }
   .hero h1 .telugu,
   .hero h1 .greet{ color: var(--mustard); display:block; font-size: 1.15em; margin-bottom: 4px; }
   .hero p{
-    margin-top: 14px;
+    margin-top: 16px;
     color: var(--on-indigo-dim);
-    font-size: 1rem;
-    max-width: 46ch;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    max-width: 62ch;
     line-height: 1.5;
   }
 
@@ -198,14 +199,14 @@
     padding-top: 12px;
   }
   .setup-label{
-    font-size: 0.78rem;
+    font-size: clamp(0.78rem, 0.95vw, 0.95rem);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--ink-soft);
   }
   .setup-value{
     font-family:'Fraunces', serif;
-    font-size: 1.15rem;
+    font-size: clamp(1.15rem, 1.6vw, 1.55rem);
     text-align:right;
   }
 
@@ -216,9 +217,9 @@
     cursor:pointer;
     font-family:'Work Sans', sans-serif;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: clamp(0.95rem, 1.25vw, 1.2rem);
     border-radius: 999px;
-    padding: 14px 26px;
+    padding: clamp(14px, 1.6vw, 20px) clamp(26px, 2.6vw, 38px);
     display:inline-flex;
     align-items:center;
     gap: 8px;
@@ -236,17 +237,17 @@
     align-items:center;
     justify-content:space-between;
   }
-  .section-title h2{ font-size: 1.3rem; color: var(--on-indigo); }
+  .section-title h2{ font-size: clamp(1.3rem, 2vw, 2rem); color: var(--on-indigo); }
   .back-link{
     background:none; border:none; color: var(--on-indigo-dim); cursor:pointer;
-    font-family: 'Work Sans', sans-serif; font-size: 0.85rem; padding: 4px 0;
+    font-family: 'Work Sans', sans-serif; font-size: clamp(0.85rem, 1.05vw, 1.05rem); padding: 4px 0;
   }
 
   .scenario-list{ display:flex; flex-direction:column; gap: 12px; }
   .scenario-card{
     background: var(--ivory);
     border-radius: var(--radius);
-    padding: 16px 18px;
+    padding: clamp(16px, 1.9vw, 26px) clamp(18px, 2.1vw, 30px);
     display:flex;
     align-items:center;
     gap: 14px;
@@ -257,10 +258,10 @@
     font-family: inherit;
     color: var(--ink);
   }
-  .scenario-card .emoji{ font-size: 1.8rem; }
-  .scenario-card .meta h3{ font-size: 1.05rem; color: var(--ink); }
-  .scenario-card .meta p{ margin: 3px 0 0; font-size: 0.83rem; color: var(--ink-soft); }
-  .scenario-card .count{ margin-left:auto; font-size:0.75rem; color: var(--maroon); font-weight:600; white-space:nowrap; }
+  .scenario-card .emoji{ font-size: clamp(1.8rem, 2.6vw, 2.6rem); }
+  .scenario-card .meta h3{ font-size: clamp(1.05rem, 1.5vw, 1.45rem); color: var(--ink); }
+  .scenario-card .meta p{ margin: 3px 0 0; font-size: clamp(0.83rem, 1.05vw, 1.05rem); color: var(--ink-soft); }
+  .scenario-card .count{ margin-left:auto; font-size:clamp(0.75rem, 0.95vw, 0.95rem); color: var(--maroon); font-weight:600; white-space:nowrap; }
 
   /* Shown in place of the cards while loading, when the list is empty, or
      when the fetch failed. */
@@ -292,12 +293,12 @@
   .prompt-card{
     background: var(--ivory);
     border-radius: var(--radius);
-    padding: 22px 20px;
+    padding: clamp(22px, 2.4vw, 34px) clamp(20px, 2.2vw, 32px);
     color: var(--ink);
     box-shadow: var(--shadow);
   }
   .prompt-card .goal-label{
-    font-size: 0.72rem;
+    font-size: clamp(0.72rem, 0.9vw, 0.9rem);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--maroon);
@@ -306,13 +307,13 @@
   }
   .prompt-card .prompt-text{
     font-family:'Fraunces', serif;
-    font-size: 1.25rem;
+    font-size: clamp(1.25rem, 2vw, 2rem);
     line-height: 1.4;
   }
-  .prompt-card .prompt-text.telugu{ font-size: 1.35rem; }
+  .prompt-card .prompt-text.telugu{ font-size: clamp(1.35rem, 2.2vw, 2.2rem); }
 
   .answer-box{ display:flex; flex-direction:column; gap:10px; }
-  .answer-box label{ font-size: 0.8rem; color: var(--on-indigo-dim); }
+  .answer-box label{ font-size: clamp(0.8rem, 1vw, 1rem); color: var(--on-indigo-dim); }
   .answer-box textarea{
     resize:none;
     min-height: 78px;
@@ -349,23 +350,23 @@
     background: var(--ivory);
     color: var(--ink);
     border-radius: var(--radius);
-    padding: 26px 22px;
+    padding: clamp(26px, 2.8vw, 40px) clamp(22px, 2.4vw, 34px);
     text-align:center;
     box-shadow: var(--shadow);
   }
-  .summary-card .big-score{ font-family:'Fraunces',serif; font-size: 3rem; color: var(--maroon); }
-  .summary-card .score-label{ font-size:0.85rem; color: var(--ink-soft); text-transform:uppercase; letter-spacing:0.08em; }
-  .summary-card p.line{ margin-top: 14px; font-size: 0.95rem; color: var(--ink-soft); }
+  .summary-card .big-score{ font-family:'Fraunces',serif; font-size: clamp(3rem, 5vw, 4.5rem); color: var(--maroon); }
+  .summary-card .score-label{ font-size:clamp(0.85rem, 1.05vw, 1.05rem); color: var(--ink-soft); text-transform:uppercase; letter-spacing:0.08em; }
+  .summary-card p.line{ margin-top: 14px; font-size: clamp(0.95rem, 1.25vw, 1.2rem); color: var(--ink-soft); }
 
   footer.note{
     margin-top: auto;
-    padding-top: 30px;
+    padding-top: 40px;
     text-align:center;
-    font-size: 0.75rem;
+    font-size: clamp(0.75rem, 0.95vw, 0.95rem);
     color: var(--on-indigo-dim);
   }
 
-  @media (max-width: 420px){
+  @media (max-width: 560px){
     .lang-row{ grid-template-columns: 1fr; }
   }
 

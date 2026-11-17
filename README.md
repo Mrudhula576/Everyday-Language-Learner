@@ -1,18 +1,102 @@
-**#Everyday Language Learner**
+# Everyday Language Learner (మాటలు · Maatalu)
 
-An adaptive, conversation-first language learning application designed to help learners communicate naturally in everyday situations.
+An app that teaches **English to Telugu speakers**, with a focus on **regional accents**.
+The app guides you in Telugu, both on screen and out loud. It teaches the English
+people actually speak where you live (or where you're going), using natural
+conversation, voice practice, and games.
 
-Instead of focusing heavily on traditional grammar lessons, the application teaches language through realistic conversations and progressively introduces more natural and advanced ways of expressing ideas.
+## Core idea
 
-**Current Goal**
-Build an initial English-learning prototype focused on everyday communication, with:
-Real-life conversation scenarios
-Personalized feedback
-AI-assisted conversation
-Adaptive learning based on the learner's progress
-Eventually, speech-to-text and text-to-speech support
+- **Taught in Telugu.** Explanations, instructions, and feedback are written and spoken in Telugu.
+- **Accent-aware English.** The app uses your location to pick an English accent
+  (for example, US English in Texas, British English in London, Australian English in Sydney,
+  or Indian English at home). You can also choose an accent yourself.
+- **Voice first.** You listen to native-accent audio (text-to-speech) and answer by speaking
+  (speech-to-text). The app scores your pronunciation against the target accent.
+- **Works without voice too.** If you can't speak or listen right now, games teach the same material.
 
-Project Status:
-🚧 In Development
+## Learning modes
 
-This project is being developed incrementally, starting with a small manually created set of everyday conversations before expanding into a larger language knowledge base.
+| Mode | What it is | Needs mic/speaker? |
+|------|------------|--------------------|
+| **Scenarios** | Guided real-life situations (grocery store, restaurant, meeting someone) with about 5 exchanges each | Optional |
+| **Free conversation** | Open-ended chat with an AI partner that speaks in your chosen accent and gives gentle corrections in Telugu | Yes (typing is the fallback) |
+| **Quiz game** | Multiple-choice and fill-in questions on phrases and meanings | No |
+| **Jump game** | Every right answer makes your character jump one step forward. Reach the end to win the level | No |
+
+## How accent selection works
+
+1. The browser asks for your location (Geolocation API). If you say no, the app guesses your country from your IP address.
+2. Your country or region is mapped to an English accent code (e.g. `US → en-US`, `GB → en-GB`, `AU → en-AU`, `IN → en-IN`, `NG → en-NG`).
+3. That code chooses the speech voice and the pronunciation-scoring model.
+4. You can always change the accent manually in settings.
+
+## Tech stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | Plain HTML / CSS / JavaScript |
+| Backend | Python, FastAPI |
+| Database | Supabase (Postgres): scenarios, quiz questions, user progress |
+| Speech (TTS, STT, pronunciation) | Azure AI Speech: regional English voices and Telugu (`te-IN`) |
+| Conversation and feedback | Claude API (Anthropic) |
+
+## Project structure
+
+```
+Everyday-Language-Learner/
+├── frontend/          # index.html, style.css, script.js
+├── backend/
+│   ├── main.py        # FastAPI app and CORS
+│   ├── database.py    # Supabase client
+│   ├── routes/        # API endpoints (scenarios, speech, chat, games)
+│   └── requirements.txt
+├── database/          # SQL schema and seed data
+└── docs/
+```
+
+## Running locally
+
+**Backend**
+
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload        # http://127.0.0.1:8000
+```
+
+Create `backend/.env` (never commit it):
+
+```
+SUPABASE_URL=...
+SUPABASE_KEY=...
+AZURE_SPEECH_KEY=...
+AZURE_SPEECH_REGION=...
+ANTHROPIC_API_KEY=...
+```
+
+**Frontend**
+
+```bash
+cd frontend
+python3 -m http.server 5500      # http://127.0.0.1:5500
+```
+
+> The microphone and location only work on `localhost`/`127.0.0.1` or over HTTPS.
+
+## Project status
+
+🚧 In development.
+
+- [x] Language setup screen (Telugu / English)
+- [x] Scenario list loaded from Supabase
+- [x] Rule-based answer checking
+- [ ] Location → accent detection
+- [ ] Text-to-speech in Telugu and accented English
+- [ ] Speech-to-text and pronunciation scoring
+- [ ] Free conversation with an AI partner
+- [ ] Quiz game
+- [ ] Jump game
+- [ ] User progress tracking

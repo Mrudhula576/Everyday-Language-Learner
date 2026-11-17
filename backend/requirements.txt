@@ -1,0 +1,17 @@
+# --- Web API ---
+fastapi==0.141.1
+uvicorn==0.52.4
+python-multipart==0.0.34        # needed for uploading recorded audio (UploadFile)
+python-dotenv==1.2.3
+
+# --- Database ---
+supabase==2.31.0
+
+# --- Voice: speech-to-text, text-to-speech, pronunciation scoring ---
+# Azure AI Speech: English voices in many regional accents (en-US, en-GB,
+# en-AU, en-IN, en-IE, en-ZA, en-NG, en-KE, en-SG, ...) plus Telugu (te-IN)
+# for both listening and speaking.
+azure-cognitiveservices-speech==1.53.1
+
+# --- AI conversation partner and feedback ---
+anthropic==2.9.0
