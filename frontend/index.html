@@ -2,159 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>మాటలు · Maatalu — Learn by Talking</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Maatalu · మాటలు</title>
+<meta name="description" content="Learn everyday English, explained in Telugu.">
+<meta name="theme-color" content="#1B2A4A">
+
+<!-- Installable app (PWA) -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Maatalu">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/shell.css">
 </head>
-<body>
-<div class="app">
+<body data-layout="public">
+  <button class="skip-link" type="button" id="skipLink">Skip to content</button>
+  <div id="chrome"></div>
+  <main id="main" class="content" tabindex="-1"></main>
 
-  <header class="topbar">
-    <div class="brand">
-      <span class="te telugu">మాటలు</span>
-      <span class="en">Maatalu</span>
-    </div>
-    <span class="streak-pill" id="scenarioBadge">V1 prototype</span>
-  </header>
-
-  <main>
-
-    <!-- ============ MAIN / LANGUAGE SETUP ============ -->
-    <!-- Shown before home. Deliberately bilingual: the user hasn't told us
-         which language to speak to them in yet. -->
-    <section class="screen active" id="screen-main">
-      <div class="hero">
-        <div class="kicker">Everyday Language Learner</div>
-        <h1><span class="telugu">స్వాగతం!</span>Welcome to Everyday Language Learner</h1>
-        <p>
-          Want to learn a new language?
-          <span class="telugu">కొత్త భాష నేర్చుకోవాలనుకుంటున్నారా?</span>
-        </p>
-      </div>
-      <div class="ikat-ribbon"></div>
-
-      <div>
-        <div class="section-title" style="margin-bottom:12px;">
-          <h2>Set up your languages</h2>
-        </div>
-        <div class="lang-row">
-          <label class="lang-card" for="prefLangSelect">
-            <div class="from">I prefer to learn in</div>
-            <select class="lang-select" id="prefLangSelect">
-              <option value="en">English</option>
-              <option value="te">తెలుగు · Telugu</option>
-            </select>
-          </label>
-          <label class="lang-card" for="learnLangSelect">
-            <div class="from">I want to learn</div>
-            <select class="lang-select" id="learnLangSelect">
-              <option value="te">తెలుగు · Telugu</option>
-              <option value="en">English</option>
-            </select>
-          </label>
-        </div>
-        <p class="lang-warning" id="langWarning">
-          Pick two different languages.
-          <span class="telugu">రెండు వేర్వేరు భాషలను ఎంచుకోండి.</span>
-        </p>
-      </div>
-
-      <div class="cta-row">
-        <button class="btn btn-primary btn-block" id="mainContinueBtn" onclick="confirmLanguages()">Continue &rarr;</button>
-      </div>
-    </section>
-
-    <!-- ============ HOME ============ -->
-    <!-- Everything here is written in the preferred language, chosen on the
-         main screen. No direction picker — that decision is already made. -->
-    <section class="screen" id="screen-home">
-      <div class="hero">
-        <button class="back-link" data-i18n="back" onclick="goTo('main')">&larr; Back</button>
-        <div class="kicker" data-i18n="heroKicker">Real situations, real words</div>
-        <h1><span class="greet" id="heroGreeting">Hi!</span><span data-i18n="heroTitle">Welcome to Everyday Language Learner.</span></h1>
-        <p data-i18n="heroBody"></p>
-      </div>
-      <div class="ikat-ribbon"></div>
-
-      <div class="setup-card">
-        <div class="setup-line">
-          <span class="setup-label" data-i18n="setupLearn">You're learning</span>
-          <span class="setup-value" id="setupLearnValue"></span>
-        </div>
-        <div class="setup-line">
-          <span class="setup-label" data-i18n="setupGuide">Guided in</span>
-          <span class="setup-value" id="setupGuideValue"></span>
-        </div>
-      </div>
-
-      <div class="cta-row">
-        <button class="btn btn-primary btn-block" id="startBtn" data-i18n="startBtn" onclick="goTo('scenario')">Continue &rarr;</button>
-      </div>
-    </section>
-
-    <!-- ============ SCENARIO SELECT ============ -->
-    <section class="screen" id="screen-scenario">
-      <div class="section-title">
-        <button class="back-link" data-i18n="back" onclick="goTo('home')">&larr; Back</button>
-        <span class="streak-pill" id="dirBadge"></span>
-      </div>
-      <div>
-        <h2 data-i18n="scenarioHeading">Pick a situation</h2>
-        <p style="color:var(--on-indigo-dim); font-size:0.9rem; margin-top:6px;" data-i18n="scenarioSub">Each one is a short, real conversation — about five exchanges.</p>
-      </div>
-      <div class="scenario-list" id="scenarioList"></div>
-    </section>
-
-    <!-- ============ CONVERSATION ============ -->
-    <section class="screen" id="screen-conversation">
-      <div class="section-title">
-        <button class="back-link" data-i18n="exitScenario" onclick="goTo('scenario')">&larr; Exit scenario</button>
-        <div class="progress-dots" id="progressDots"></div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="goal-label" id="goalLabel">Goal</div>
-        <div class="prompt-text" id="promptText"></div>
-      </div>
-
-      <div class="answer-box">
-        <label id="answerLabel" for="answerInput">Your response</label>
-        <textarea id="answerInput" placeholder="Type what you'd actually say…"></textarea>
-      </div>
-
-      <div class="feedback-inline" id="feedbackBox">
-        <span class="verdict" id="feedbackVerdict"></span>
-        <span id="feedbackText"></span>
-        <div class="suggest" id="feedbackSuggest"></div>
-      </div>
-
-      <div class="conv-actions">
-        <button class="btn btn-primary" id="checkBtn" data-i18n="checkBtn" onclick="checkAnswer()">Check my answer</button>
-        <button class="btn btn-ghost" id="nextBtn" data-i18n="nextBtn" style="display:none;" onclick="nextTurn()">Continue &rarr;</button>
-      </div>
-    </section>
-
-    <!-- ============ SUMMARY ============ -->
-    <section class="screen" id="screen-summary">
-      <div class="summary-card">
-        <div class="score-label" data-i18n="summaryLabel">Scenario complete</div>
-        <div class="big-score" id="summaryScore">0/0</div>
-        <h3 id="summaryTitle" style="margin-top:6px;"></h3>
-        <p class="line" id="summaryLine"></p>
-      </div>
-      <div class="cta-row" style="display:flex; gap:10px;">
-        <button class="btn btn-ghost btn-block" data-i18n="tryAnother" onclick="goTo('scenario')">Try another situation</button>
-        <button class="btn btn-primary btn-block" data-i18n="home" onclick="goTo('home')">Home</button>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="note" data-i18n="footer">Rule-based feedback for now — smarter, LLM-flexible checking is coming in V2.</footer>
-</div>
-
-<script src="script.js"></script>
+  <noscript>Maatalu needs JavaScript turned on.</noscript>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
