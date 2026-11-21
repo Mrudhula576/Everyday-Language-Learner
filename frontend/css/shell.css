@@ -1,0 +1,161 @@
+/* App shell: the three layouts and the phone / laptop switch.
+   Phone layout below 700px, laptop layout from 700px up.
+
+   public -> top bar (logo, Log in, Sign up)
+   app    -> bottom menu on phones, left sidebar on laptops
+   focus  -> only an Exit link (onboarding, lessons, games) */
+
+:root{
+  --sidebar-w: 220px;
+  --bottom-nav-h: 68px;
+  --content-max: 1200px;
+}
+
+.skip-link{
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: none;
+  background: var(--mustard);
+  color: var(--indigo-deep);
+  font: 600 0.95rem var(--font-body);
+  transform: translateY(-200%);
+}
+.skip-link:focus{ transform: none; }
+
+.content{
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) var(--space-7);
+  outline: none;
+  animation: rise 0.3s ease;
+}
+@keyframes rise{ from{ opacity: 0; transform: translateY(8px); } to{ opacity: 1; transform: none; } }
+
+/* ---- Logo ---- */
+.brand{
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+}
+.brand-te{ font-size: 1.5rem; font-weight: 600; color: var(--mustard); }
+.brand-en{ font-size: 0.8rem; color: var(--on-indigo-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ---- Public layout: top bar ---- */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4);
+  padding-top: max(var(--space-3), env(safe-area-inset-top));
+  background: rgba(27,42,74,0.92);
+  backdrop-filter: blur(8px);
+}
+.topbar-actions{ display: flex; gap: var(--space-2); }
+
+/* ---- Focus layout: just Exit ---- */
+.focusbar{
+  display: flex;
+  align-items: center;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4);
+  padding-top: max(var(--space-3), env(safe-area-inset-top));
+}
+.exit-link{
+  color: var(--on-indigo-dim);
+  text-decoration: none;
+  font-weight: 500;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.exit-link:hover{ color: var(--on-indigo); }
+
+/* ---- App layout: menus (same items in both) ---- */
+.nav-item{
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--on-indigo-dim);
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 12px;
+}
+.nav-item:hover{ color: var(--on-indigo); }
+.nav-item.active{ background: var(--mustard); color: var(--indigo-deep); }
+.nav-icon{ font-size: 1.25rem; line-height: 1; }
+
+/* Phone: bottom menu */
+.sidebar{ display: none; }
+.bottom-nav{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 6px 6px max(6px, env(safe-area-inset-bottom));
+  background: var(--indigo-deep);
+  border-top: 1px solid rgba(247,239,221,0.1);
+}
+.bottom-nav .nav-item{
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-height: 56px;
+  padding: 4px;
+  font-size: 0.75rem;
+  text-align: center;
+}
+.bottom-nav .bi{ align-items: center; }
+.bottom-nav .bi-te{ font-size: 0.85em; }
+body[data-layout="app"] .content{
+  padding-bottom: calc(var(--bottom-nav-h) + var(--space-6) + env(safe-area-inset-bottom));
+}
+
+/* Laptop: left sidebar */
+@media (min-width: 700px){
+  .bottom-nav{ display: none; }
+  .sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--sidebar-w);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-5) var(--space-4);
+    background: var(--indigo-deep);
+  }
+  .sidebar-nav{ display: flex; flex-direction: column; gap: var(--space-2); }
+  .sidebar .nav-item{ min-height: 48px; padding: 8px 14px; }
+  body[data-layout="app"] .content{
+    margin-left: var(--sidebar-w);
+    max-width: calc(var(--content-max) - var(--sidebar-w));
+    padding: var(--space-6) var(--space-6) var(--space-7);
+  }
+
+  .content{ padding: var(--space-6) var(--space-6) var(--space-7); }
+  .topbar, .focusbar{ padding-left: var(--space-6); padding-right: var(--space-6); }
+}
+
+/* ---- Placeholder pages ---- */
+.placeholder{ max-width: 640px; }
+.next-links{ display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.next-links .btn{ min-height: 56px; }
+.next-links .bi{ text-align: left; }

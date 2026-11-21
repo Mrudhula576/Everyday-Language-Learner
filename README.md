@@ -39,13 +39,18 @@ conversation, voice practice, and games.
 | Backend | Python, FastAPI |
 | Database | Supabase (Postgres): scenarios, quiz questions, user progress |
 | Speech (TTS, STT, pronunciation) | Azure AI Speech: regional English voices and Telugu (`te-IN`) |
-| Conversation and feedback | Claude API (Anthropic) |
+| Conversation and feedback | Gemini API (free tier, Gemini 4 Hydrogen), behind one swappable function so another provider (e.g. Claude) can be used later |
 
 ## Project structure
 
 ```
 Everyday-Language-Learner/
-├── frontend/          # index.html, style.css, script.js
+├── frontend/
+│   ├── index.html     # app shell (one page; pages are drawn by JavaScript)
+│   ├── manifest.webmanifest, sw.js, icons/   # installable app (PWA)
+│   ├── css/           # theme.css (colors, buttons, cards), shell.css (layouts)
+│   └── js/            # app.js, router.js, routes.js, i18n.js, pages/
+├── wireframes.drawio  # phone + browser wireframes for every page
 ├── backend/
 │   ├── main.py        # FastAPI app and CORS
 │   ├── database.py    # Supabase client
@@ -74,7 +79,7 @@ SUPABASE_URL=...
 SUPABASE_KEY=...
 AZURE_SPEECH_KEY=...
 AZURE_SPEECH_REGION=...
-ANTHROPIC_API_KEY=...
+GEMINI_API_KEY=...
 ```
 
 **Frontend**
@@ -84,15 +89,22 @@ cd frontend
 python3 -m http.server 5500      # http://127.0.0.1:5500
 ```
 
+Pages use hash URLs, for example `http://127.0.0.1:5500/#/home` or `#/lessons/3/oral`.
+All routes are listed in `frontend/js/routes.js`. Pages that aren't built yet show a
+placeholder with the issue number and links to the next pages, so the whole flow can be clicked through.
+
+Below 700px wide the app uses the phone layout (bottom menu); from 700px up it uses the
+laptop layout (left sidebar). On a phone, "Add to Home Screen" installs it like an app.
+
 > The microphone and location only work on `localhost`/`127.0.0.1` or over HTTPS.
+> The service worker caches app files: if a change doesn't show up, do a hard reload.
 
 ## Project status
 
 🚧 In development.
 
-- [x] Language setup screen (Telugu / English)
-- [x] Scenario list loaded from Supabase
-- [x] Rule-based answer checking
+- [x] App shell: routing, phone + laptop layouts, installable app (PWA), English + Telugu text
+- [x] Scenario list loaded from Supabase (prototype; becoming lesson topics)
 - [ ] Location → accent detection
 - [ ] Text-to-speech in Telugu and accented English
 - [ ] Speech-to-text and pronunciation scoring

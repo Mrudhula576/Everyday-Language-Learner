@@ -7,6 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from routes.scenarios import router as scenarios_router
+from routes.voices import router as voices_router
 app = FastAPI(title="ELL API")
 
 app.add_middleware(
@@ -20,9 +21,10 @@ app.include_router(
     scenarios_router,
     prefix="/api",
 )
+app.include_router(voices_router, prefix="/api")
 
 @app.get("/")
 def root():
     return {"message": "Everyday Language Learner is running!"}
 
-#Now the backend has 2 endpoints (GET /, and GET /api/scenarios)
+#Now the backend has 3 endpoints (GET /, GET /api/scenarios, GET /api/voices)

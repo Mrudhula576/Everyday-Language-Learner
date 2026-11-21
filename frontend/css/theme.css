@@ -1,0 +1,171 @@
+/* Theme: colors, fonts and shared building blocks (buttons, cards, inputs).
+   Pages reuse these classes instead of defining their own colors. */
+
+:root{
+  --indigo: #1B2A4A;
+  --indigo-deep: #131F38;
+  --ivory: #FBF3E4;
+  --ivory-dim: #EFE4CD;
+  --mustard: #E3A008;
+  --maroon: #A13D3D;
+  --leaf: #4C7A5A;
+  --blue: #2E4470;
+  --ink: #241C10;
+  --ink-soft: #4A4030;
+  --on-indigo: #F7EFDD;
+  --on-indigo-dim: #C9BFA6;
+
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow: 0 12px 30px -14px rgba(19,31,56,0.45);
+
+  --font-body: 'Work Sans', 'Noto Sans Telugu', sans-serif;
+  --font-display: 'Fraunces', 'Noto Sans Telugu', serif;
+  --font-telugu: 'Noto Sans Telugu', sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+}
+
+*{ box-sizing: border-box; }
+
+html{ -webkit-text-size-adjust: 100%; }
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--indigo);
+  background-image:
+    radial-gradient(circle at 15% 8%, rgba(227,160,8,0.10), transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(161,61,61,0.14), transparent 45%);
+  background-attachment: fixed;
+  color: var(--on-indigo);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display{
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0;
+}
+h1{ font-size: clamp(1.7rem, 4vw, 2.8rem); }
+h2{ font-size: clamp(1.3rem, 2.4vw, 1.9rem); }
+h3{ font-size: clamp(1.1rem, 1.6vw, 1.35rem); }
+p{ margin: 0; }
+
+a{ color: var(--mustard); }
+:focus-visible{ outline: 3px solid var(--mustard); outline-offset: 3px; border-radius: 6px; }
+h1:focus{ outline: none; }
+
+.telugu{ font-family: var(--font-telugu); }
+.muted{ color: var(--on-indigo-dim); }
+
+/* Bilingual label: English, with Telugu underneath (hidden in English-only mode). */
+.bi{ display: inline-flex; flex-direction: column; gap: 2px; }
+.bi-te{ font-size: 0.72em; font-weight: 400; opacity: 0.85; }
+h1 .bi-te, h2 .bi-te{ color: var(--mustard); opacity: 1; font-size: 0.55em; }
+
+/* ---- Ikat ribbon: woven diamond border, used sparingly ---- */
+.ikat-ribbon{
+  height: 10px;
+  width: 100%;
+  background:
+    linear-gradient(135deg, transparent 45%, var(--mustard) 45%, var(--mustard) 55%, transparent 55%),
+    linear-gradient(-135deg, transparent 45%, var(--maroon) 45%, var(--maroon) 55%, transparent 55%);
+  background-size: 20px 20px, 20px 20px;
+  background-position: 0 0, 10px 0;
+  opacity: 0.9;
+}
+
+/* ---- Buttons ---- */
+.btn{
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  border-radius: 999px;
+  min-height: 48px;               /* big enough to tap easily */
+  padding: 12px 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.12s ease, opacity 0.12s ease, background-color 0.12s ease;
+}
+.btn:active{ transform: scale(0.97); }
+.btn:disabled{ opacity: 0.4; cursor: not-allowed; }
+.btn-primary{ background: var(--mustard); color: var(--indigo-deep); }
+.btn-ghost{ background: transparent; color: var(--on-indigo); border: 1px solid rgba(247,239,221,0.35); }
+.btn-ghost:hover{ background: rgba(247,239,221,0.06); }
+.btn-sm{ min-height: 40px; padding: 8px 18px; font-size: 0.95rem; }
+.btn-block{ width: 100%; }
+
+/* ---- Cards and inputs ---- */
+.card{
+  background: var(--ivory);
+  color: var(--ink);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  box-shadow: var(--shadow);
+  border: none;
+}
+.card a{ color: var(--maroon); }
+.card-label{
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  font-weight: 600;
+  padding: 0;
+}
+
+.input{
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(247,239,221,0.3);
+  background: rgba(251,243,228,0.06);
+  color: var(--on-indigo);
+  font: inherit;
+}
+.input:focus{ border-color: var(--mustard); outline: none; }
+
+.choice{ display: flex; align-items: center; gap: var(--space-3); min-height: 44px; cursor: pointer; }
+.choice input{ width: 20px; height: 20px; accent-color: var(--maroon); }
+
+.pill{
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(227,160,8,0.16);
+  color: var(--mustard);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Layout helpers ---- */
+.stack{ display: flex; flex-direction: column; gap: var(--space-5); }
+.stack-sm{ display: flex; flex-direction: column; gap: var(--space-3); }
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation: none !important; transition: none !important; }
+}
