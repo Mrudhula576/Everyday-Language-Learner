@@ -48,13 +48,15 @@ Everyday-Language-Learner/
 ├── frontend/
 │   ├── index.html     # app shell (one page; pages are drawn by JavaScript)
 │   ├── manifest.webmanifest, sw.js, icons/   # installable app (PWA)
-│   ├── css/           # theme.css (colors, buttons, cards), shell.css (layouts)
-│   └── js/            # app.js, router.js, routes.js, i18n.js, pages/
+│   ├── css/           # theme.css (colors, buttons, cards), shell.css (layouts), one file per page
+│   ├── audio/accents/ # short sample per accent (made by backend/make_accent_samples.py)
+│   └── js/            # app.js, router.js, routes.js, i18n.js, config.js (API address), pages/
 ├── wireframes.drawio  # phone + browser wireframes for every page
 ├── backend/
 │   ├── main.py        # FastAPI app and CORS
 │   ├── database.py    # Supabase client
 │   ├── routes/        # API endpoints (scenarios, speech, chat, games)
+│   ├── make_accent_samples.py  # re-run after changing a default voice
 │   └── requirements.txt
 ├── database/          # SQL schema and seed data
 └── docs/

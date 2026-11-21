@@ -7,6 +7,8 @@
 //     mount(root, params) { … return cleanupFn; },             // optional: events, timers
 //   };
 
+import landing from './landing.js';
+
 export const PAGES = {
-  // '/': landing,   (issue #3)
+  '/': landing, // issue #3
 };

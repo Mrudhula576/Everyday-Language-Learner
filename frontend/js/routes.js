@@ -8,9 +8,11 @@
 // issue: the GitHub issue that builds the real page. Until then a placeholder
 // page shows the title and links to the next pages in the flow.
 // exit: where the Exit link goes in focus layout (null = no Exit link).
+// sections: top-bar links (laptop only) that scroll to a section of the same page.
 
 export const ROUTES = [
-  { page: 1, path: '/', title: 'pageLanding', layout: 'public', issue: 3, next: ['/signup', '/login'] },
+  { page: 1, path: '/', title: 'pageLanding', layout: 'public', issue: 3, next: ['/signup', '/login'],
+    sections: [{ id: 'how', label: 'navHowItWorks' }, { id: 'accents', label: 'navAccents' }] },
   { page: 2, path: '/signup', title: 'pageSignup', layout: 'public', issue: 4, next: ['/level-check', '/login'] },
   { page: 8, path: '/login', title: 'pageLogin', layout: 'public', issue: 5, next: ['/home', '/forgot-password', '/signup'] },
   { page: 9, path: '/forgot-password', title: 'pageForgot', layout: 'public', issue: 5, next: ['/login'] },

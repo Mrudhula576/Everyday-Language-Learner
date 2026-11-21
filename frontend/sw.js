@@ -4,18 +4,22 @@
 // is only used when the network fails. API calls (/api/...) are never cached.
 // Bump CACHE when the list of app files changes.
 
-const CACHE = 'maatalu-v1';
+const CACHE = 'maatalu-v2';
 const APP_FILES = [
   './',
   './index.html',
   './manifest.webmanifest',
   './css/theme.css',
   './css/shell.css',
+  './css/landing.css',
+  './js/accents.js',
   './js/app.js',
+  './js/config.js',
   './js/i18n.js',
   './js/router.js',
   './js/routes.js',
   './js/pages/index.js',
+  './js/pages/landing.js',
   './js/pages/placeholder.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
