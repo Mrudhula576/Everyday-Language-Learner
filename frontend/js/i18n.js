@@ -83,6 +83,72 @@ const STRINGS = {
   footerPrivacy: { en: 'Privacy', te: 'గోప్యత' },
   footerContact: { en: 'Contact', te: 'సంప్రదించండి' },
 
+  // Sign up
+  back: { en: 'Back', te: 'వెనక్కి' },
+  fieldEmail: { en: 'Email', te: 'ఈమెయిల్' },
+  fieldUsername: { en: 'Username', te: 'పేరు' },
+  fieldPassword: { en: 'Password', te: 'పాస్‌వర్డ్' },
+  usernameHint: {
+    en: '3–30 letters or numbers, no spaces. You can also use _ and .',
+    te: 'ఖాళీలు లేకుండా 3–30 ఇంగ్లీష్ అక్షరాలు లేదా అంకెలు. _ మరియు . కూడా వాడవచ్చు.',
+  },
+  passwordHint: { en: 'At least 8 characters', te: 'కనీసం 8 అక్షరాలు' },
+  showPassword: { en: 'Show password', te: 'పాస్‌వర్డ్ చూపించు' },
+  hidePassword: { en: 'Hide password', te: 'పాస్‌వర్డ్ దాచు' },
+  createAccount: { en: 'Create account', te: 'ఖాతా తెరవండి' },
+  creatingAccount: { en: 'Creating your account…', te: 'మీ ఖాతా తెరుస్తున్నాం…' },
+  or: { en: 'or', te: 'లేదా' },
+  continueGoogle: { en: 'Continue with Google', te: 'Google తో కొనసాగండి' },
+  haveAccount: { en: 'Already have an account?', te: 'ఇప్పటికే ఖాతా ఉందా?' },
+  usernameChecking: { en: 'Checking…', te: 'చూస్తున్నాం…' },
+  usernameFree: { en: 'This username is free', te: 'ఈ పేరు అందుబాటులో ఉంది' },
+  errEmailEmpty: { en: 'Enter your email', te: 'మీ ఈమెయిల్ రాయండి' },
+  errEmailInvalid: {
+    en: "This doesn't look like an email. Check it, e.g. name@gmail.com",
+    te: 'ఇది ఈమెయిల్ లాగా లేదు. ఒకసారి చూడండి, ఉదా: name@gmail.com',
+  },
+  errEmailTaken: {
+    en: 'An account with this email already exists. Log in instead.',
+    te: 'ఈ ఈమెయిల్‌తో ఇప్పటికే ఖాతా ఉంది. లాగిన్ అవ్వండి.',
+  },
+  errUsernameEmpty: { en: 'Choose a username', te: 'ఒక పేరు ఎంచుకోండి' },
+  errUsernameFormat: {
+    en: 'Use 3–30 letters or numbers, with no spaces. _ and . are allowed.',
+    te: 'ఖాళీలు లేకుండా 3–30 ఇంగ్లీష్ అక్షరాలు లేదా అంకెలు వాడండి. _ మరియు . వాడవచ్చు.',
+  },
+  errUsernameTaken: {
+    en: 'This username is taken. Try another one.',
+    te: 'ఈ పేరు ఇప్పటికే ఎవరో తీసుకున్నారు. ఇంకొకటి ప్రయత్నించండి.',
+  },
+  errPasswordShort: { en: 'Use at least 8 characters', te: 'కనీసం 8 అక్షరాలు వాడండి' },
+  errPasswordWeak: {
+    en: 'This password is too easy to guess. Try a longer one.',
+    te: 'ఈ పాస్‌వర్డ్ సులభంగా ఊహించవచ్చు. ఇంకా పొడవైనది ప్రయత్నించండి.',
+  },
+  errTooMany: {
+    en: 'Too many tries. Wait a minute and try again.',
+    te: 'చాలా సార్లు ప్రయత్నించారు. ఒక నిమిషం ఆగి మళ్ళీ ప్రయత్నించండి.',
+  },
+  errOffline: {
+    en: 'No internet connection. Check it and try again.',
+    te: 'ఇంటర్నెట్ లేదు. కనెక్షన్ చూసి మళ్ళీ ప్రయత్నించండి.',
+  },
+  errGeneric: { en: 'Something went wrong. Please try again.', te: 'ఏదో తప్పు జరిగింది. మళ్ళీ ప్రయత్నించండి.' },
+  errGoogle: {
+    en: "Google sign-in didn't work. Try again, or sign up with email.",
+    te: 'Google తో లాగిన్ కాలేదు. మళ్ళీ ప్రయత్నించండి, లేదా ఈమెయిల్‌తో ఖాతా తెరవండి.',
+  },
+  fixErrors: { en: 'Please fix the fields marked in red.', te: 'ఎరుపు రంగులో ఉన్నవి సరిచేయండి.' },
+  checkEmail: {
+    en: 'Almost done! Open the email we sent you to confirm your account.',
+    te: 'దాదాపు పూర్తయింది! మీ ఖాతాను నిర్ధారించడానికి మేము పంపిన ఈమెయిల్ తెరవండి.',
+  },
+  whyTitle: { en: 'Why Maatalu?', te: 'మాటలు ఎందుకు?' },
+  why1: { en: 'A Telugu voice explains every step', te: 'ప్రతి అడుగును తెలుగు గొంతు వివరిస్తుంది' },
+  why2: { en: 'Practice speaking, or just tap', te: 'మాట్లాడి సాధన చేయండి, లేదా నొక్కండి' },
+  why3: { en: 'Games make practice fun', te: 'ఆటలతో సాధన సరదాగా ఉంటుంది' },
+  why4: { en: 'Progress saved on every device', te: 'మీ ప్రగతి అన్ని పరికరాల్లో సేవ్ అవుతుంది' },
+
   // Placeholder pages (until each page's own issue is built)
   comingSoon: { en: 'This page is being built in issue', te: 'ఈ పేజీ తయారవుతోంది' },
   goTo: { en: 'Go to', te: 'వెళ్ళండి' },

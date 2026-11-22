@@ -8,7 +8,9 @@
 //   };
 
 import landing from './landing.js';
+import signup from './signup.js';
 
 export const PAGES = {
   '/': landing, // issue #3
+  '/signup': signup, // issue #4
 };
