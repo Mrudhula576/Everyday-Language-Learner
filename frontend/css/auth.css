@@ -1,0 +1,107 @@
+/* Sign up (issue #4), reused by Log in (#5). Phone first; laptop from 700px. */
+
+.auth{ display: grid; gap: var(--space-6); }
+.auth-main{ display: flex; flex-direction: column; gap: var(--space-4); width: 100%; max-width: 440px; }
+.auth-why{ display: none; }
+
+.back-link{
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--on-indigo-dim);
+  text-decoration: none;
+  font-weight: 500;
+}
+.back-link:hover{ color: var(--on-indigo); }
+
+/* ---- Form ---- */
+.auth-form{ display: flex; flex-direction: column; gap: var(--space-4); }
+.field{ display: flex; flex-direction: column; gap: 6px; }
+.field-label{ font-weight: 600; }
+.field-label .bi{ flex-direction: row; align-items: baseline; gap: 8px; }
+.field-label .bi-te{ font-size: 0.85em; color: var(--on-indigo-dim); }
+.field-control{ position: relative; }
+.field-control .input{ font-size: 1.05rem; }
+.field-hint{ font-size: 0.85rem; }
+.field-hint .bi-te{ font-size: 0.95em; }
+
+.field-error{ font-size: 0.9rem; font-weight: 500; color: var(--on-indigo-dim); min-height: 0; }
+.field-error:empty{ display: none; }
+.field-error .bi-te{ font-size: 0.95em; }
+.field.has-error .input{ border-color: #F08A8A; background: rgba(161,61,61,0.18); }
+.field.has-error .field-error{ color: #F5A3A3; }
+.field.has-error .field-hint{ display: none; } /* the error already says what to do */
+.field.is-ok .input{ border-color: #8FC49E; }
+.field.is-ok .field-error{ color: #A8D8B5; }
+.field.is-ok .field-error, .field.has-error .field-error{ display: flex; gap: 6px; align-items: baseline; }
+
+/* Show / hide password */
+.field-control:has(.field-eye) .input{ padding-right: 56px; }
+.field-eye{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 48px;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: none;
+  color: var(--on-indigo-dim);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.field-eye[aria-pressed="true"]{ color: var(--mustard); }
+
+.form-alert{
+  padding: var(--space-3) var(--space-4);
+  border-radius: 12px;
+  background: rgba(227,160,8,0.14);
+  border: 1px solid rgba(227,160,8,0.5);
+  color: var(--on-indigo);
+  font-weight: 500;
+}
+.form-alert[hidden]{ display: none; }
+
+.auth-form .btn-primary{ margin-top: var(--space-2); }
+.auth-form .btn .bi{ align-items: center; }
+
+/* ---- or / Google / switch ---- */
+.auth-or{ display: flex; align-items: center; gap: var(--space-3); color: var(--on-indigo-dim); font-size: 0.9rem; }
+.auth-or::before, .auth-or::after{ content: ''; flex: 1; height: 1px; background: rgba(247,239,221,0.18); }
+
+.btn-google{ background: #fff; color: #1F1F1F; }
+.btn-google:hover{ background: #F1F1F1; }
+.btn-google .bi{ align-items: center; }
+.google-g{
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: conic-gradient(#EA4335 0 25%, #FBBC05 0 50%, #34A853 0 75%, #4285F4 0);
+  color: #fff;
+  font: 700 0.85rem var(--font-body);
+}
+
+.auth-switch{ text-align: center; color: var(--on-indigo-dim); }
+.auth-switch a{ font-weight: 600; display: inline-block; min-height: 44px; line-height: 44px; }
+
+/* ---- Laptop: "Why Maatalu?" panel beside the form ---- */
+@media (min-width: 700px){
+  .auth{ grid-template-columns: minmax(0, 1fr) minmax(0, 440px); align-items: start; gap: var(--space-7); }
+  .auth-why{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    background: var(--indigo-deep);
+    position: sticky;
+    top: 96px;
+  }
+  .auth-why ul{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-5); }
+  .auth-why li{ display: flex; align-items: flex-start; gap: var(--space-3); font-size: 1.05rem; font-weight: 500; }
+  .auth-why-icon{ font-size: 1.6rem; line-height: 1.1; }
+}

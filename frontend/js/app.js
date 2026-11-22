@@ -93,6 +93,19 @@ document.getElementById('skipLink').addEventListener('click', () => {
   (main.querySelector('h1') || main).focus();
 });
 
+// Coming back from Google sign-in (?code=...): finish signing in first,
+// then open the right page.
+if (/[?&](code|error)=/.test(location.search)) {
+  let next = '/signup';
+  try {
+    const { finishOAuthRedirect } = await import('./auth.js');
+    next = await finishOAuthRedirect();
+  } catch (err) {
+    console.error('Could not finish Google sign-in:', err);
+  }
+  history.replaceState(null, '', `${location.pathname}#${next}`);
+}
+
 ROUTES.forEach(addRoute);
 setNotFound(NOT_FOUND);
 onTextModeChange(() => render(match(currentPath())));

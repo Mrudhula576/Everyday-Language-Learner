@@ -101,6 +101,20 @@ laptop layout (left sidebar). On a phone, "Add to Home Screen" installs it like 
 > The microphone and location only work on `localhost`/`127.0.0.1` or over HTTPS.
 > The service worker caches app files: if a change doesn't show up, do a hard reload.
 
+**Supabase sign-in settings** (dashboard, one time)
+
+The frontend talks to Supabase directly with the publishable key in `frontend/js/config.js`
+(safe to share: Row Level Security protects the data).
+
+1. **Authentication → Sign In / Providers → Email:** turn **Confirm email** off, so new
+   learners go straight to the Level check.
+2. **Authentication → URL Configuration:** set **Site URL** to where the app runs
+   (e.g. `http://127.0.0.1:5500`) and add the same address under **Redirect URLs**.
+   Add `http://localhost:5500` too, and the real site address once it's deployed.
+3. **Google sign-in:** create an OAuth client in Google Cloud Console (type *Web application*,
+   authorized redirect URI `https://<project>.supabase.co/auth/v1/callback`), then paste its
+   Client ID and secret into **Authentication → Sign In / Providers → Google**.
+
 ## Project status
 
 🚧 In development.
