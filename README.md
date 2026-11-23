@@ -58,7 +58,6 @@ Everyday-Language-Learner/
 │   ├── routes/        # API endpoints (scenarios, speech, chat, games)
 │   ├── make_accent_samples.py  # re-run after changing a default voice
 │   └── requirements.txt
-├── database/          # SQL schema and seed data
 └── docs/
 ```
 
@@ -84,6 +83,16 @@ AZURE_SPEECH_REGION=...
 GEMINI_API_KEY=...
 ```
 
+**Database (Supabase)**
+
+1. Supabase dashboard → SQL Editor → paste `backend/supabase/schema.sql` → Run.
+   It is safe to run again after changes.
+2. Paste `backend/supabase/tests/rls_test.sql` → Run. The last result should say
+   `ALL RLS TESTS PASSED`. The test rolls itself back, so it leaves no data behind.
+
+Every learner can only read and change their own rows (Row Level Security);
+lessons are read-only for everyone. The app uses the publishable (anon) key.
+
 **Frontend**
 
 ```bash
@@ -107,6 +116,7 @@ laptop layout (left sidebar). On a phone, "Add to Home Screen" installs it like 
 
 - [x] App shell: routing, phone + laptop layouts, installable app (PWA), English + Telugu text
 - [x] Scenario list loaded from Supabase (prototype; becoming lesson topics)
+- [x] Database schema with Row Level Security (profiles, lessons, progress, attempts, game results)
 - [ ] Location → accent detection
 - [ ] Text-to-speech in Telugu and accented English
 - [ ] Speech-to-text and pronunciation scoring
