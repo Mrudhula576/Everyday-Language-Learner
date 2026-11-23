@@ -37,6 +37,52 @@ const STRINGS = {
   pageSettings: { en: 'Settings', te: 'సెట్టింగ్స్' },
   pageNotFound: { en: 'Page not found', te: 'ఈ పేజీ లేదు' },
 
+  // Landing page
+  navHowItWorks: { en: 'How it works', te: 'ఎలా పనిచేస్తుంది' },
+  navAccents: { en: 'Accents', te: 'యాసలు' },
+  heroSub: {
+    en: 'Speak or tap, at your own pace. A Telugu voice guides every step.',
+    te: 'మాట్లాడుతూ లేదా నొక్కుతూ, మీ వేగంలో నేర్చుకోండి. ప్రతి అడుగులో తెలుగు గొంతు దారి చూపిస్తుంది.',
+  },
+  getStarted: { en: 'Get started', te: 'మొదలుపెట్టండి' },
+  heroNote: { en: 'Free · works on phone and laptop', te: 'ఉచితం · ఫోన్‌లో, ల్యాప్‌టాప్‌లో పనిచేస్తుంది' },
+  demoVideo: { en: 'Demo video coming soon', te: 'డెమో వీడియో త్వరలో' },
+  scrollHint: { en: 'Scroll to see what you can do', te: 'మీరు ఏమి చేయగలరో చూడటానికి కిందకు జరపండి' },
+  whatYouCanDo: { en: 'What you can do', te: 'మీరు ఏమి చేయగలరు' },
+  tryIt: { en: 'Try it', te: 'ప్రయత్నించండి' },
+  modeSpeak: { en: 'Learn by speaking', te: 'మాట్లాడుతూ నేర్చుకోండి' },
+  modeSpeakBody: {
+    en: 'Hear a phrase in a US voice, say it back, and see a score for every word. A Telugu voice explains each step.',
+    te: 'US గొంతులో ఒక మాట విని, మళ్ళీ చెప్పండి. ప్రతి పదానికి మార్కు కనిపిస్తుంది. ప్రతి అడుగును తెలుగు గొంతు వివరిస్తుంది.',
+  },
+  modeRead: { en: 'Learn by reading', te: 'చదువుతూ నేర్చుకోండి' },
+  modeReadBody: {
+    en: 'The same lessons with no mic. Put words in order, pick the meaning, fill in blanks. Good for quiet places.',
+    te: 'అవే పాఠాలు, మైక్ అవసరం లేదు. పదాలను వరుసలో పెట్టండి, అర్థం ఎంచుకోండి, ఖాళీలు పూరించండి. నిశ్శబ్దంగా ఉండాల్సిన చోట్లకు బాగుంటుంది.',
+  },
+  modeKite: { en: 'Kite game (speak)', te: 'గాలిపటం ఆట (మాట్లాడి)' },
+  modeKiteBody: {
+    en: 'Say the word right and your kite flies higher. Three misses and the string snaps.',
+    te: 'పదాన్ని సరిగ్గా పలికితే మీ గాలిపటం ఇంకా పైకి ఎగురుతుంది. మూడు సార్లు తప్పితే దారం తెగిపోతుంది.',
+  },
+  modeBridge: { en: 'Bridge game (tap)', te: 'వంతెన ఆట (నొక్కి)' },
+  modeBridgeBody: {
+    en: 'Each right answer is one step across the bridge. Three wrong answers or 60 seconds and you fall.',
+    te: 'ప్రతి సరైన జవాబుకు వంతెనపై ఒక అడుగు ముందుకు. మూడు తప్పులు లేదా 60 సెకన్లు అయితే కింద పడిపోతారు.',
+  },
+  accentsTitle: { en: '{n} English accents', te: '{n} ఇంగ్లీష్ యాసలు' },
+  accentsHint: {
+    en: 'Tap one to hear it · switch any time in Settings',
+    te: 'వినడానికి ఒకదాన్ని నొక్కండి · సెట్టింగ్స్‌లో ఎప్పుడైనా మార్చుకోవచ్చు',
+  },
+  playSample: { en: 'Play the {accent} accent', te: '{accent} యాస వినండి' },
+  teluguVoice: { en: 'A Telugu voice guides you the whole way', te: 'మొదటి నుండి చివరి వరకు తెలుగు గొంతు మీకు తోడుగా ఉంటుంది' },
+  teluguVoiceBody: { en: 'Instructions and tips are spoken in Telugu.', te: 'సూచనలు, చిట్కాలు తెలుగులో వినిపిస్తాయి.' },
+  readyTitle: { en: 'Ready to start?', te: 'మొదలుపెడదామా?' },
+  footerAbout: { en: 'About', te: 'మా గురించి' },
+  footerPrivacy: { en: 'Privacy', te: 'గోప్యత' },
+  footerContact: { en: 'Contact', te: 'సంప్రదించండి' },
+
   // Placeholder pages (until each page's own issue is built)
   comingSoon: { en: 'This page is being built in issue', te: 'ఈ పేజీ తయారవుతోంది' },
   goTo: { en: 'Go to', te: 'వెళ్ళండి' },
@@ -88,9 +134,14 @@ function entry(key) {
   return value;
 }
 
+/** Fill {name} slots: fill('{n} accents', {n: 7}) -> '7 accents' */
+function fill(text, vars) {
+  return vars ? text.replace(/\{(\w+)\}/g, (slot, name) => (name in vars ? vars[name] : slot)) : text;
+}
+
 /** Plain text in one language (for titles, aria-labels, placeholders). */
-export function t(key, lang = 'en') {
-  return entry(key)[lang] || entry(key).en;
+export function t(key, lang = 'en', vars = null) {
+  return fill(entry(key)[lang] || entry(key).en, vars);
 }
 
 export function esc(text) {
@@ -102,8 +153,18 @@ export function esc(text) {
 }
 
 /** HTML for a bilingual label: English, plus Telugu underneath when the mode is 'both'. */
-export function bi(key) {
-  const { en, te } = entry(key);
+export function bi(key, vars = null) {
+  const en = fill(entry(key).en, vars);
+  const te = entry(key).te && fill(entry(key).te, vars);
   if (mode === 'en' || !te) return `<span class="bi"><span class="bi-en">${esc(en)}</span></span>`;
   return `<span class="bi"><span class="bi-en">${esc(en)}</span><span class="bi-te telugu" lang="te">${esc(te)}</span></span>`;
+}
+
+/** HTML for a bilingual paragraph: an English <p>, plus a Telugu <p> when the mode is 'both'. */
+export function biPara(key, className = '') {
+  const { en, te } = entry(key);
+  const cls = className ? ` ${className}` : '';
+  const english = `<p class="para-en${cls}">${esc(en)}</p>`;
+  if (mode === 'en' || !te) return english;
+  return `${english}<p class="para-te telugu${cls}" lang="te">${esc(te)}</p>`;
 }

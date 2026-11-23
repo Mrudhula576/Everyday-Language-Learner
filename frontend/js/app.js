@@ -18,9 +18,20 @@ function brand() {
     </a>`;
 }
 
-function publicBar() {
+// Section links are buttons, not "#how" links: the hash router would read
+// "#how" as a page. The page's own mount() makes them scroll.
+function sectionLinks(route) {
+  if (!route.sections) return '';
+  return `<nav class="topbar-sections" aria-label="On this page">
+      ${route.sections.map((s) => `
+        <button type="button" class="topbar-link" data-scroll-to="${s.id}">${esc(t(s.label))}</button>`).join('')}
+    </nav>`;
+}
+
+function publicBar(route) {
   return `<header class="topbar">
       ${brand()}
+      ${sectionLinks(route)}
       <nav class="topbar-actions" aria-label="Account">
         <a class="btn btn-ghost btn-sm" href="${link('/login')}">${esc(t('logIn'))}</a>
         <a class="btn btn-primary btn-sm" href="${link('/signup')}">${esc(t('signUp'))}</a>
@@ -62,7 +73,7 @@ function render({ route, params }) {
   chrome.innerHTML =
     route.layout === 'app' ? appChrome(route.nav) :
     route.layout === 'focus' ? focusBar(route) :
-    publicBar();
+    publicBar(route);
 
   const page = PAGES[route.path] || placeholder;
   main.innerHTML = page.render(route, params);
